@@ -175,3 +175,9 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+
+.not-found,
+.search-for
+{
+  color: #959595f2;
+}

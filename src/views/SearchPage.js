@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
+import SearchBookItem from '../components/SearchBookItem';
+import NotFound from '../components/NotFound';
 
-const SearchPage = () => {
+const SearchPage = ({handleSearchInput, searchValue, books, update, searchMatch}) => {
 
+  if (searchValue === '') {
+    books = [];
+  }
 
   return (
     <div className="search-books">
@@ -16,11 +21,26 @@ const SearchPage = () => {
         <input
           type="text"
           placeholder="Search by title, author, or ISBN"
+          onChange={(e) => handleSearchInput(e.target.value)}
+          value={searchValue}
         />
       </div>
     </div>
     <div className="search-books-results">
-      <ol className="books-grid"></ol>
+      <ol className="books-grid">
+        {
+          searchMatch ? (
+          
+            books.map((book) => <SearchBookItem book={book} update={update} key={book.id} />)
+
+          )
+          : (
+          
+            <NotFound searchValue={searchValue} searchMatch={searchMatch} />
+
+          )
+        }
+      </ol>
     </div>
   </div>
   )
