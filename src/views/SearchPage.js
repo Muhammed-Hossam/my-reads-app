@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom'
-import SearchBookItem from '../components/SearchBookItem';
+import BookItem from '../components/BookItem';
 import NotFound from '../components/NotFound';
 
 const SearchPage = ({handleSearchInput, searchValue, books, update, searchMatch}) => {
 
-  if (searchValue === '') {
-    books = [];
-  }
+  
 
   return (
     <div className="search-books">
@@ -31,7 +29,7 @@ const SearchPage = ({handleSearchInput, searchValue, books, update, searchMatch}
         {
           searchMatch ? (
           
-            books.map((book) => <SearchBookItem book={book} update={update} key={book.id} />)
+            books.map((book) => <BookItem book={book} update={update} key={book.id} />)
 
           )
           : (

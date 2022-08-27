@@ -1,7 +1,10 @@
-
-
 const BookItem = ({book, update}) => {
-  const bookImage = book.imageLinks.thumbnail;
+  let bookImage = null;
+  bookImage =
+    book.imageLinks && book.imageLinks.thumbnail
+      ? book.imageLinks.thumbnail
+      : null;
+
   const bookTitle = book.title;
   const bookAuthors = book.authors.join(' - ');
 
@@ -26,8 +29,8 @@ const BookItem = ({book, update}) => {
             }}
           ></div>
           <div className="book-shelf-changer">
-            <select onChange={updateShelf} value={book.shelf}>
-              <option value="none" disabled>
+            <select onChange={updateShelf} value={book.shelf ? book.shelf : 'none'}>
+              <option value="move" disabled>
                 Move to...
               </option>
               <option value="currentlyReading">Currently Reading</option>

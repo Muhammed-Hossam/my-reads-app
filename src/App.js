@@ -24,15 +24,26 @@ function App() {
   const handleSearchBooks = async (query) => {
     await BooksAPI.search(query).then((data) => {
       if (data && !data.error) {
-        setSearchBooks(data);
+        let searchBooksArr = data.map(book => {
+          
+          allBooks.forEach(bookInMainPage => {
+            if (bookInMainPage.id === book.id) {
+              book.shelf = bookInMainPage.shelf;
+            }
+          })
+          return book;
+        });
+        
+        setSearchBooks(searchBooksArr);
         setIsSearchValueMatch(true);
       }else {
-        setSearchBooks('no books');
+        setSearchBooks([]);
         setIsSearchValueMatch(false);
       }
 
     })
   };
+
 
   useEffect(() => {
     getAllBooks();
@@ -45,7 +56,7 @@ function App() {
     }
 
     if (isSearchValueMatch === false) {
-      setSearchBooks('no books')
+      setSearchBooks([])
     }
 
     if (searchInputValue === '') {
@@ -54,6 +65,7 @@ function App() {
 
     console.log(searchInputValue);
   }, [searchInputValue, isSearchValueMatch]);
+
 
   const updateBookShelf = async (book, shelf) => {
     await BooksAPI.update(book, shelf);
