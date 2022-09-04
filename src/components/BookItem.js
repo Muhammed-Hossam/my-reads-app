@@ -1,4 +1,4 @@
-const BookItem = ({book, update}) => {
+const BookItem = ({ book, update }) => {
   let bookImage = null;
   bookImage =
     book.imageLinks && book.imageLinks.thumbnail
@@ -6,14 +6,16 @@ const BookItem = ({book, update}) => {
       : null;
 
   const bookTitle = book.title;
-  const bookAuthors = book.authors.join(' - ');
+  const bookAuthors =
+    book.authors && book.authors.length > 1
+      ? book.authors.join(" - ")
+      : book.authors;
 
 
   const updateShelf = (event) => {
     update(book, event.target.value);
-    console.log('value => ', event.target.value);
-  }
-
+    console.log("value => ", event.target.value);
+  };
 
   return (
     <li>
@@ -24,12 +26,14 @@ const BookItem = ({book, update}) => {
             style={{
               width: 128,
               height: 193,
-              backgroundImage:
-                `url(${bookImage})`,
+              backgroundImage: `url(${bookImage})`,
             }}
           ></div>
           <div className="book-shelf-changer">
-            <select onChange={updateShelf} value={book.shelf ? book.shelf : 'none'}>
+            <select
+              onChange={updateShelf}
+              value={book.shelf ? book.shelf : "none"}
+            >
               <option value="move" disabled>
                 Move to...
               </option>

@@ -5,7 +5,6 @@ import NotFound from '../components/NotFound';
 const SearchPage = ({handleSearchInput, searchValue, books, update, searchMatch}) => {
 
   
-
   return (
     <div className="search-books">
     <div className="search-books-bar">

@@ -4,16 +4,15 @@ import BookShelf from '../components/BookShelf';
 
 const MainPage = ({allBooks, update}) => {
 
-  console.log(allBooks);
 
 
   const curShelfBooks = allBooks.filter(book => book.shelf === 'currentlyReading');
   const wantShelfBooks = allBooks.filter(book => book.shelf === 'wantToRead');
   const readShelfBooks = allBooks.filter(book => book.shelf === 'read');
 
-  console.log('current',curShelfBooks);
-  console.log('wantToRead', wantShelfBooks);
-  console.log('read', readShelfBooks);
+  // console.log('current',curShelfBooks);
+  // console.log('wantToRead', wantShelfBooks);
+  // console.log('read', readShelfBooks);
 
 
 
