@@ -1,3 +1,6 @@
+import classes from './BookItem.module.css';
+
+
 const BookItem = ({ book, update }) => {
   let bookImage = null;
   bookImage =
@@ -19,17 +22,17 @@ const BookItem = ({ book, update }) => {
 
   return (
     <li>
-      <div className="book">
-        <div className="book-top">
+      <div className={classes['book']}>
+        <div className={classes['book-top']}>
           <div
-            className="book-cover"
+            className={classes['book-cover']}
             style={{
               width: 128,
               height: 193,
               backgroundImage: `url(${bookImage})`,
             }}
           ></div>
-          <div className="book-shelf-changer">
+          <div className={classes['book-shelf-changer']}>
             <select
               onChange={updateShelf}
               value={book.shelf ? book.shelf : "none"}
@@ -44,8 +47,8 @@ const BookItem = ({ book, update }) => {
             </select>
           </div>
         </div>
-        <div className="book-title">{bookTitle}</div>
-        <div className="book-authors">{bookAuthors}</div>
+        <div className={classes['book-title']}>{bookTitle}</div>
+        <div className={classes['book-authors']}>{bookAuthors}</div>
       </div>
     </li>
   );

@@ -9,11 +9,16 @@ function App() {
   const [allBooks, setAllBooks] = useState([]);
   const [searchInputValue, setSearchInputValue] = useState("");
   const [searchBooks, setSearchBooks] = useState([]);
-  const [isSearchValueMatch, setIsSearchValueMatch] = useState(false)
+  const [isSearchValueMatch, setIsSearchValueMatch] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
 
   const getAllBooks = async () => {
-    await BooksAPI.getAll().then((data) => setAllBooks(data));
+    await BooksAPI.getAll().then((data) => {
+      setAllBooks(data)
+    } 
+    );
+    
   };
 
   const handleSearchInput = (value) => {  
@@ -36,9 +41,11 @@ function App() {
         
         setSearchBooks(searchBooksArr);
         setIsSearchValueMatch(true);
+        setNotFound(false);
       }else {
         setSearchBooks([]);
         setIsSearchValueMatch(false);
+        setNotFound(true);
       }
 
     })
@@ -56,11 +63,12 @@ function App() {
     }
 
     if (isSearchValueMatch === false) {
-      setSearchBooks([])
+      setSearchBooks([]);
     }
 
     if (searchInputValue === '') {
       setIsSearchValueMatch(false);
+      setNotFound(false);
     }
 
     console.log(searchInputValue);
@@ -78,7 +86,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<MainPage allBooks={allBooks} update={updateBookShelf} />}
+            element={<MainPage allBooks={allBooks} update={updateBookShelf}  />}
           />
           <Route
             path="/search"
@@ -89,6 +97,7 @@ function App() {
                 books={searchBooks}
                 update={updateBookShelf}
                 searchMatch={isSearchValueMatch}
+                notFound={notFound}
               />
             }
           />
